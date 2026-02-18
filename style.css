@@ -36,15 +36,6 @@ nav {
   padding: 15px 0;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 600;
-  font-size: 1.2rem;
-  color: #2c3e50;
-}
-
 .logo img {
   border-radius: 5px;
 }
@@ -196,6 +187,139 @@ nav {
   height: auto;
   display: block;
   transition: transform 0.5s;
+}
+
+/* Limit image size so images don't appear too large on wide screens */
+.about-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.5s;
+}
+
+/* Default gallery images: keep small */
+.gallery-image img {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+  .gallery-item {
+    display: flex;
+    flex-direction: column; /* stack image then text */
+    align-items: center; /* center image and text */
+    gap: 12px;
+  }
+
+  .gallery-image {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .gallery-row.two-up {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  /* make each column in the two-up row take equal space but respect image max widths */
+  .gallery-row.two-up .gallery-item {
+    flex: 1 1 0;
+    max-width: 520px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  @media (max-width: 768px) {
+    .gallery-row.two-up {
+      flex-direction: column;
+      gap: 16px;
+    }
+    .gallery-row.two-up .gallery-item {
+      max-width: 100%;
+    }
+  }
+
+  .gallery-image img {
+    width: 100%;
+    max-width: 300px; /* small images */
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+
+/* Featured gallery item: span and center, make image larger */
+.gallery-feature {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.gallery-feature .gallery-image img {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+.gallery-info {
+  text-align: center;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 12px;
+}
+
+.gallery-feature .gallery-info {
+  max-width: 900px;
+}
+
+@media (max-width: 768px) {
+  .gallery-feature .gallery-image img {
+    max-width: 100%;
+  }
+  .gallery-image img {
+    max-width: 100%;
+  }
+}
+
+/* Caption and gallery text styling */
+.about-figure {
+  margin: 0;
+}
+
+.image-caption {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #2c3e50;
+  font-size: 0.95rem;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.gallery-info {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.gallery-info h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #2c3e50;
+}
+
+.gallery-info p {
+  margin: 6px 0 0;
+  color: #666;
+  font-size: 0.95rem;
 }
 
 .about-image:hover img {
@@ -366,5 +490,39 @@ footer {
 
   .activities-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Global image padding: ensure all images have a consistent padding */
+img {
+  padding: 12px;
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make gallery/about images uniform in size while keeping responsiveness */
+.gallery-image img,
+.about-image img,
+.about-figure img {
+  width: 100%;
+  max-width: 600px; /* common max width */
+  height: 400px;    /* common height so all images match visually */
+  object-fit: cover; /* crop to fill without distortion */
+  display: block;
+  margin: 0 auto;
+}
+
+.gallery-row.two-up .gallery-item {
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .gallery-image img,
+  .about-image img,
+  .about-figure img {
+    max-width: 100%;
+    height: auto; /* allow natural height on smaller screens */
   }
 }
